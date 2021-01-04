@@ -11,26 +11,50 @@ class ChartController {
             owner: userId
         }).where('title').equals(title);
 
-        if(existingChart){
+        console.log(existingChart);
+
+        if(existingChart.length > 0){
             return res.status(400).json({
                 error: 'Esse gráfico já existe em nosso sistema.'
             })
         }
 
-        const chart = Chart.build({
+        const chart = await Chart.build({
             title,
             type,
-            values
+            values,
+            owner: userId,
         })
 
         await chart.save();
 
         return res.status(200).send({
             id: chart._id,
+            type,
             title,
             values
         });
     }   
+
+    async getAllCharts(req: Request , res:  Response){
+        const userId = req.userId;
+
+        const allCharts = await Chart.find({
+            owner: userId
+        });
+
+        return res.status(200).send(allCharts);
+    }
+
+    async getOneChart (req: Request , res: Response) {
+        const userId = req.userId;
+
+        const { id } = req.body;
+
+        const OneChart = await Chart.findById(id);
+
+        return res.status(200).send(OneChart);
+    }
 }
 
 export default new ChartController();

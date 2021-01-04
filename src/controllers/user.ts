@@ -106,13 +106,10 @@ class UserController {
       user: {
         email: existingUser.email
       },
-      password: userJwt
+      token: userJwt
     });
   }  
 };
-
-
-
 
 export default new UserController();
 

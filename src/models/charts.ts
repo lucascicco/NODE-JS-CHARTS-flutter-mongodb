@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { ObjectId } from 'mongoose';
 
 interface ChartAttrs {
     title: string;
@@ -8,6 +8,7 @@ interface ChartAttrs {
         color: string;
         value: number;
       }>;
+    owner?: string;
 };
 
 interface ChartModel extends mongoose.Model<ChartDoc>{
@@ -41,11 +42,16 @@ const chartSchema = new mongoose.Schema({
     },
     owner: { 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User' 
+        ref: 'User',
+        required: true,
     }, 
 });
 
 
-const Chart = mongoose.model<ChartDoc, ChartModel>('User', chartSchema);
+chartSchema.statics.build = (attrs: ChartAttrs) => {
+    return new Chart(attrs);
+};
+
+const Chart = mongoose.model<ChartDoc, ChartModel>('Chart', chartSchema);
 
 export { Chart };

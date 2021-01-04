@@ -27,8 +27,12 @@ routes.post('/signin', [
       .trim()
       .notEmpty()
       .withMessage('Senha é obrigatória')
-  ], userController.signIn);
+], userController.signIn);
+
+routes.use(authMiddleware);
 
 routes.post('/createcharts', chartsController.store);
+routes.get('/charts', chartsController.getAllCharts);
+routes.get('/chart', chartsController.getOneChart);
 
 export default routes;
