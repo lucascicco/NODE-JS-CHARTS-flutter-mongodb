@@ -23,6 +23,7 @@ interface ChartDoc extends mongoose.Document{
         color: string;
         value: number;
       }>;
+    owner: string;
     createdAt: string;
     updatedAt: string;
 };

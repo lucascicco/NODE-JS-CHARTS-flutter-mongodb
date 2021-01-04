@@ -36,7 +36,7 @@ class ChartController {
         });
     }   
 
-    async getAllCharts(req: Request , res:  Response){
+    async getAllCharts(req: Request , res:  Response) {
         const userId = req.userId;
 
         const allCharts = await Chart.find({
@@ -46,12 +46,35 @@ class ChartController {
         return res.status(200).send(allCharts);
     }
 
-    async getOneChart (req: Request , res: Response) {
+    async getOneChart(req: Request , res:  Response) {
+        const userId = req.userId;
+
+        const chart = await Chart.findById(userId);
+
+        return res.status(200).send(chart);
+    }
+
+
+    async deleteOne (req: Request , res: Response) {
         const userId = req.userId;
 
         const { id } = req.body;
 
         const OneChart = await Chart.findById(id);
+
+        if(!OneChart){
+            return res.status(400).json({
+                error: 'Gráfico inexistente'
+            })
+        }
+
+        if(OneChart?.owner != userId){
+            return res.status(400).json({
+                error: 'Você não tem permissão para deletar esse gráfico'
+            })
+        }   
+
+        await Chart.deleteOne(OneChart);
 
         return res.status(200).send(OneChart);
     }
