@@ -1,4 +1,5 @@
 import { Chart } from '../models/charts';
+import mongoose from 'mongoose';
 import { Request, Response } from "express";
 
 class ChartController {
@@ -49,9 +50,19 @@ class ChartController {
     async getOneChart(req: Request , res:  Response) {
         const userId = req.userId;
 
-        const chart = await Chart.findById(userId);
+        if(!mongoose.isValidObjectId(req.query.id)){
+            return res.status(400).json({
+                error: 'Id inválido para busca.'
+            })
+        }
 
-        return res.status(200).send(chart);
+        await Chart.find({
+            owner: userId
+        }).where('_id').equals(req.query.id).then((response) => {
+            return res.status(200).send(response);
+        }).catch((e) => {
+            return res.status(400).send('Gráfico não encontrado');
+        })
     }
 
 
