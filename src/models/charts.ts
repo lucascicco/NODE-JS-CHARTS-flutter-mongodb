@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 interface ChartAttrs {
     title: string;
-    description: string;
     type: number;
     values: Array<{
         name: string;
@@ -17,7 +16,6 @@ interface ChartModel extends mongoose.Model<ChartDoc>{
 
 interface ChartDoc extends mongoose.Document{
     title: string;
-    description: string;
     type: number;
     values: Array<{
         name: string;
@@ -33,10 +31,6 @@ const chartSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    description: {
-        type: String,
-        required: true
-    },
     type: {
         type: Number,
         required: true
@@ -45,7 +39,10 @@ const chartSchema = new mongoose.Schema({
         type: Array,
         required: true
     },
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, 
+    owner: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User' 
+    }, 
 });
 
 

@@ -3,11 +3,13 @@ import { body } from 'express-validator';
 import authMiddleware from './middlewares/auth';
 
 import userController from './controllers/user';
+import chartsController from './controllers/charts';
 
 const routes = Router();
 
 routes.post('/signup', [
     body('email')
+      .trim()
       .isEmail()
       .withMessage('É necessário um email válido'),
     body('password')
@@ -18,6 +20,7 @@ routes.post('/signup', [
 
 routes.post('/signin', [
     body('email')
+      .trim()
       .isEmail()
       .withMessage('É necessário um email válido'),
     body('password')
@@ -25,5 +28,7 @@ routes.post('/signin', [
       .notEmpty()
       .withMessage('Senha é obrigatória')
   ], userController.signIn);
+
+routes.post('/createcharts', chartsController.store);
 
 export default routes;

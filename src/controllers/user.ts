@@ -6,9 +6,14 @@ import { Password } from '../services/password';
 
 class UserController {
   async store(req: Request , res:  Response) {
+    console.log(req.body);
+
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
+      console.log(errors);
+
+      
       return res.status(400).json({
         error: 'Validação incorreta'
       })
@@ -21,6 +26,8 @@ class UserController {
     });
 
     if(existingUser){
+      console.log(errors);
+
       return res.status(400).json({
         error: 'Usuário já existente'
       })
@@ -36,19 +43,29 @@ class UserController {
     const userJwt = jwt.sign(
       {
         id: user._id,
-      }, process.env.APP_SECRET!
+        email: user.email
+      }, process.env.APP_SECRET! ,{
+        expiresIn: process.env.EXPIRES_DATE!
+      }
     );
 
     return res.status(200).send({
-        user,
+        user: {
+          id:  user._id,
+          email: user.email
+        },
         token: userJwt
     });
   }
 
   async signIn(req: Request , res:  Response) {
+    console.log(req.body);
+    
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
+      console.log(errors);
+
       return res.status(400).json({
         error: 'Validação incorreta'
       })
@@ -79,17 +96,22 @@ class UserController {
     const userJwt = jwt.sign(
       {
         id: existingUser.id,
-        email: existingUser.email
       },
-      process.env.APP_SECRET!
+      process.env.APP_SECRET!, {
+        expiresIn: process.env.EXPIRES_DATE!
+      }
     );
 
     res.status(200).send({
-      user: existingUser,
+      user: {
+        email: existingUser.email
+      },
       password: userJwt
     });
   }  
 };
+
+
 
 
 export default new UserController();
