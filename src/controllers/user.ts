@@ -6,8 +6,6 @@ import { Password } from '../services/password';
 
 class UserController {
   async store(req: Request , res:  Response) {
-    console.log(req.body);
-
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {

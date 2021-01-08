@@ -31,9 +31,9 @@ routes.post('/signin', [
 
 routes.use(authMiddleware);
 
-routes.post('/createcharts', chartsController.store);
+routes.post('/create-charts', chartsController.store);
 routes.get('/charts', chartsController.getAllCharts);
 routes.get('/chart', chartsController.getOneChart);
-routes.delete('/delete-chart', chartsController.deleteOne);
+routes.delete('/delete-chart/:id', chartsController.deleteOne);
 
 export default routes;

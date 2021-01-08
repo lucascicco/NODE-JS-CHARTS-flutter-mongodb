@@ -12,15 +12,13 @@ class ChartController {
             owner: userId
         }).where('title').equals(title);
 
-        console.log(existingChart);
-
         if(existingChart.length > 0){
             return res.status(400).json({
                 error: 'Esse gráfico já existe em nosso sistema.'
             })
         }
 
-        const chart = await Chart.build({
+        const chart = Chart.build({
             title,
             type,
             values,
@@ -35,6 +33,8 @@ class ChartController {
             title,
             values
         });
+        
+        console.log(chart);
     }   
 
     async getAllCharts(req: Request , res:  Response) {
@@ -61,7 +61,9 @@ class ChartController {
         }).where('_id').equals(req.query.id).then((response) => {
             return res.status(200).send(response);
         }).catch((e) => {
-            return res.status(400).send('Gráfico não encontrado');
+            return res.status(400).json({
+                error: 'Gráfico não encontrado'
+            });
         })
     }
 
@@ -69,7 +71,7 @@ class ChartController {
     async deleteOne (req: Request , res: Response) {
         const userId = req.userId;
 
-        const { id } = req.body;
+        const { id } = req.params;
 
         const OneChart = await Chart.findById(id);
 
