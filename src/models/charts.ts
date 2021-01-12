@@ -5,7 +5,7 @@ interface ChartAttrs {
     type: number;
     values: Array<{
         name: string;
-        color: string;
+        color: number;
         value: number;
       }>;
     owner?: string;
@@ -20,7 +20,7 @@ interface ChartDoc extends mongoose.Document{
     type: number;
     values: Array<{
         name: string;
-        color: string;
+        color: number;
         value: number;
       }>;
     owner: string;

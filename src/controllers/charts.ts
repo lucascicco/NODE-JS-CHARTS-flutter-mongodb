@@ -28,13 +28,12 @@ class ChartController {
         await chart.save();
 
         return res.status(200).send({
-            id: chart._id,
+            _id: chart._id,
             type,
             title,
             values
         });
-        
-        console.log(chart);
+    
     }   
 
     async getAllCharts(req: Request , res:  Response) {
