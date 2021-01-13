@@ -12,7 +12,7 @@ Há dois Models.
 
 **Chart**, armazena atributos como: title, type, values e owner. 
 
-<i> Em **Chart**, o atributo owner é relacionado com os ID's no model **User**, da mesma forma que em User há uma relação com o model Chart, que futuramente pode ser dar o acesso dos dados através do populate <i/>
+<i> Em **Chart**, o atributo owner é relacionado com os ID's no model **User**, da mesma forma que em User há uma relação com o model Chart, que futuramente pode ser dar o acesso dos dados através do populate </i>
   
 <hr/>
   
@@ -28,7 +28,7 @@ There are two Models.
 
 **Chart**, stores attributes such as: title, type, values and owner.
 
-<i> In **Chart**, the owner attribute is related to the ID's in the **User** model, in the same way that in User there is a relationship with the Chart model, which in the future may be giving access to the data through of the populate <i/>
+<i> In **Chart**, the owner attribute is related to the ID's in the **User** model, in the same way that in User there is a relationship with the Chart model, which in the future may be giving access to the data through of the populate </i>
 
 
 Bibliotecas/Libraries: 
