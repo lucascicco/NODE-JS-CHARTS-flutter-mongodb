@@ -14,5 +14,40 @@ Há dois Models.
 
 <i> Em **Chart**, o atributo owner é relacionado com os ID's no model **User**, da mesma forma que em User há uma relação com o model Chart, que futuramente pode ser dar o acesso dos dados através do populate <i/>
   
+<hr/>
   
+Back-end written in **TypeScript** with **NodeJS** of the CHARTS APP FLUTTER application, with MongoDB as a database and jwt for authentication. Total 2 Models. User and Chart.
+
+In general, the database is hosted on localhost, running in isolation inside a docker container with the MongoDB image, the connection is through the mongoose, and **express** was used to create API wheels inside the back-end. Like: GET, POST, PATCH / PUT, DELETE.
+
+There was also the authentication factor, using **JsonWebToken** to generate tokens and also serve as middleware for routes that depend on authentication.
+
+There are two Models.
+
+**User**, stores attributes such as: email and password.
+
+**Chart**, stores attributes such as: title, type, values and owner.
+
+<i> In **Chart**, the owner attribute is related to the ID's in the **User** model, in the same way that in User there is a relationship with the Chart model, which in the future may be giving access to the data through of the populate <i/>
+
+
+Bibliotecas/Libraries: 
+
+ - express
+ - express-validator
+ - helmet
+ - jsonwebtoken
+ - mongoose
+ - nodemon
+ - dotenv
+ - body-parser
+
+<hr/>
+
+Desenvolvido por,
+ 
+Developed by,
+
+Lucascicco.
+ 
  
